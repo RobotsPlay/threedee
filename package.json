@@ -9,7 +9,7 @@
     "build": "webpack --progress --config webpack.dev.js",
     "build-prod": "webpack --progress --config webpack.prod.js",
     "build-debug": "webpack --progress --color --display-error-details --config webpack.dev.js",
-    "watch": "webpack -w --config webpack.dev.js & webpack -w --config webpack.prod.js",
+    "watch": "webpack -w --config webpack.dev.js",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },

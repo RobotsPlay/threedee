@@ -8,8 +8,9 @@ import './sass/main.scss';
 
 ReactDOM.render(
     <Panelset>
+        <div>Toolbar Left</div>
         <Viewport />
-        <div>Hi there</div>
+        <div>Toolbar Right</div>
     </Panelset>,
     document.getElementById('root')
 );

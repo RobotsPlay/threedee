@@ -5,7 +5,7 @@ export default class Panel extends React.Component {
         return (
             <div className="panelset-panel panelset-panel-sizeable">
                 {this.props.children}
-                <div draggable="true" class="panelset-panel-handle"></div>
+                <div draggable="true" className="panelset-panel-handle"></div>
             </div>
         )
     }
