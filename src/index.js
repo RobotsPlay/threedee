@@ -10,7 +10,10 @@ ReactDOM.render(
     <Panelset>
         <div>Toolbar Left</div>
         <Viewport />
-        <div>Toolbar Right</div>
+        <Panelset direction="vert">
+            <div>Upper Panel</div>
+            <div>Lower Panel</div>
+        </Panelset>
     </Panelset>,
     document.getElementById('root')
 );

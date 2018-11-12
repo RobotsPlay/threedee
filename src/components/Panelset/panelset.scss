@@ -1,8 +1,13 @@
+.body {
+    width: 100vw;
+    height: 100vh;
+}
+
 .panelset {
     display: grid;
     grid-template-columns: 1fr;  
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
 
     &-panel {
         background: goldenrod;
@@ -32,6 +37,7 @@
             left: 0;
             right: 0;
             top: 100%;
+            width: 100%;
             height: 8px;
             z-index: 2;
             cursor: ns-resize;

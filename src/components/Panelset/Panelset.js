@@ -21,21 +21,23 @@ export default class Panelset extends React.Component {
 
     setGridTemplate(panel = null, axisOffset = 0) {
         let template = '';
-        let templateRule = 'gridTemplateColumns';
+        let templateRule = this.props.direction === 'vert' ? 'gridTemplateRows' : 'gridTemplateColumns';
+        let sizeField = this.props.direction === 'vert' ? 'offsetHeight' : 'offsetWidth';
+        let offsetField = this.props.direction === 'vert' ? 'offsetTop' : 'offsetLeft';
         let rule = {}
         
         if(panel) {
             this.panelRefs.forEach((panelRef) => {
                 let panelRefNode = ReactDOM.findDOMNode(panelRef.current);
                 if(panel === panelRefNode) {
-                    let newWidth = ((axisOffset - panelRefNode.offsetLeft) / this.panelsetRef.current.offsetWidth);
-                    template += `${newWidth * 100}% `;
+                    let newSize = ((axisOffset - panelRefNode[offsetField]) / this.panelsetRef.current[sizeField]);
+                    template += `${newSize * 100}% `;
                 }
                 else if(panel.nextElementSibling === panelRefNode) {
                     template += '1fr ';   
                 }
                 else {
-                    template += `${(panelRefNode.offsetWidth / this.panelsetRef.current.offsetWidth) * 100}% `;
+                    template += `${(panelRefNode[sizeField] / this.panelsetRef.current[sizeField]) * 100}% `;
                 }
             });
         }
@@ -62,7 +64,6 @@ export default class Panelset extends React.Component {
         if(panel.classList.contains('panelset-panel-handle') || !this.isChildPanel(panel)) {
             return false;
         }
-        console.log('Drag Start');
         e.dataTransfer.setDragImage(document.createElement('img'), 0, 0)
     }
 
@@ -72,7 +73,7 @@ export default class Panelset extends React.Component {
             return false;
         }
 
-        this.setGridTemplate(panel, e.clientX);
+        this.setGridTemplate(panel, this.props.direction === 'vert' ? e.clientY : e.clientX);
     }
 
     render() {
@@ -91,7 +92,7 @@ export default class Panelset extends React.Component {
                         let panelRef = React.createRef();
                         this.panelRefs.push(panelRef);
                         return (
-                            <Panel ref={panelRef} key={i}>{child}</Panel>
+                            <Panel ref={panelRef} key={i} direction={this.props.direction || 'horiz'}>{child}</Panel>
                         );
                     })
                 }
